@@ -5,7 +5,7 @@ class DwarvesController < ApplicationController
   end
 
   def show
-    @dwarf = Dwarf.find(params[:id])
+    
   end
 
   def new
