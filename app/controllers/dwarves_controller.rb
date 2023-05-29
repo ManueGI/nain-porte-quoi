@@ -19,8 +19,21 @@ class DwarvesController < ApplicationController
     if @dwarf.save
       redirect_to profile_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+  end
+
+  def update
+    @dwarf.update(params_dwarf)
+    redirect_to profile_path
+  end
+
+  def destroy
+    @dwarf.destroy
+    redirect_to profile_path
   end
 
   private
