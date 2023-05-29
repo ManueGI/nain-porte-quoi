@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_130309) do
     t.string "name"
     t.text "description"
     t.integer "age"
-    t.string "location"
+    t.string "address"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_130309) do
     t.string "user_name"
     t.string "first_name"
     t.string "last_name"
-    t.string "adress"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
