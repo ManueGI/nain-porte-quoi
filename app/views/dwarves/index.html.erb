@@ -3,7 +3,9 @@
     <% @dwarves.each do |dwarf| %>
       <div class="card-dwarf m-3">
         <div id="dwarf-img">
+        <% if dwarf.photo.attached? %>
           <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
+          <% end %>
         </div>
         <h2 class="p-1"><%= dwarf.name %></h2>
         <h3 class="p-1"><%= dwarf.age %></h3>
