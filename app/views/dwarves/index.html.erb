@@ -1,7 +1,7 @@
 <div class="container">
   <div class="dwarf-display-grid">
     <% @dwarves.each do |dwarf| %>
-      <div class="card-dwarf m-3">
+      <div class="card-dwarf m-3 rounded">
           <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
         <h2 class="p-2 m-1"><%= dwarf.name %></h2>
         <h3 class="p-2 m-1"><%= dwarf.age %> ans</h3>
