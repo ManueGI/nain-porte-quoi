@@ -3,4 +3,9 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def profile
+    @dwarves = current_user.dwarves
+    @rented_dwarves = current_user.rented_dwarves
+  end
 end

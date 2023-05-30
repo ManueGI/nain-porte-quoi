@@ -14,6 +14,7 @@ class RentalsController < ApplicationController
 
   def create
     @rental = Rental.new(params_rental)
+    @rental.rental_end = params[:rental][:rental_begin].split(" to ").last
     @user = current_user
     @dwarf = Dwarf.find(params[:dwarf_id])
     @rental.user = @user
@@ -41,7 +42,7 @@ class RentalsController < ApplicationController
   private
 
   def params_rental
-    params.require(:rental).permit(:rental_begin, :rental_end)
+    params.require(:rental).permit(:rental_begin)
   end
 
   def set_rental

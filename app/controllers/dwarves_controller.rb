@@ -7,13 +7,13 @@ class DwarvesController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
     @rental = Rental.new
-    @user = current_user
-    @rental.user = @user
-=======
-
->>>>>>> e3fd3a1df3cd8fe5cc8233cae27c072c31f8d7ba
+    @reserved = @dwarf.rentals.map do |rental|
+      {
+        from: rental.rental_begin,
+        to: rental.rental_end
+      }
+    end
   end
 
   def new

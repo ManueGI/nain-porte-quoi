@@ -5,12 +5,18 @@
   <p><%=@dwarf.age%></p>
 </div>
 
-<%# <div class="" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%=  cl_image_path @dwarf.photo.key, height: 300, crop: :fill if @dwarf.photo.attached? %>
 
+<%  if @dwarf.photo.attached?  %>
+<%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
+<% end %>
 
 <%= simple_form_for [@dwarf, @rental] do |f| %>
-  <%= f.input  :rental_begin%>
-  <%= f.input  :rental_end%>
+  <%= f.input  :rental_begin,
+              as: :string,
+              input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved }} %>
+  <%#= f.input  :rental_end,
+              as: :string,
+              input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved } } %>
   <%= f.submit %>
 
 <% end %>
