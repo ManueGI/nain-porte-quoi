@@ -1,0 +1,10 @@
+<h1>Present your Dwarf :</h1>
+
+<%= simple_form_for(@dwarf) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :age %>
+  <%= f.input :address %>
+  <%=f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
