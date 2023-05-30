@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :dwarfs
   has_many :rentals
+  has_one_attached :avatar, dependent: :destroy
 
   # validates :user_name, :first_name, :last_name, :address, presence: true
 
