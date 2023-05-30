@@ -14,14 +14,14 @@ class RentalsController < ApplicationController
 
   def create
     @rental = Rental.new(params_rental)
-    @user = User.find(params[:user_id])
+    @user = current_user
     @dwarf = Dwarf.find(params[:dwarf_id])
     @rental.user = @user
     @rental.dwarf = @dwarf
     if @rental.save
       redirect_to profile_path
     else
-      render :new, status: :unprocessable_entity
+      render :show
     end
   end
 

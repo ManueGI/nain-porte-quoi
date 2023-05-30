@@ -5,7 +5,9 @@ class DwarvesController < ApplicationController
   end
 
   def show
-    
+    @rental = Rental.new
+    @user = current_user
+    @rental.user = @user
   end
 
   def new
