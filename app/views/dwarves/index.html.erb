@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="dwarf-display-grid">
+    <% @dwarves.each do |dwarf| %>
+      <div class="card m-3">
+        <h2 class="p-3"><%= dwarf.name %></h2>
+        <h3 class="p-3"><%= dwarf.age %></h3>
+        <p class="p-3"><%= dwarf.description %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
