@@ -1,13 +1,19 @@
 class DwarvesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_dwarf, only: [:show, :edit, :update, :destroy]
+
   def index
     @dwarves = Dwarf.all
   end
 
   def show
+<<<<<<< HEAD
     @rental = Rental.new
     @user = current_user
     @rental.user = @user
+=======
+
+>>>>>>> e3fd3a1df3cd8fe5cc8233cae27c072c31f8d7ba
   end
 
   def new
@@ -16,8 +22,7 @@ class DwarvesController < ApplicationController
 
   def create
     @dwarf = Dwarf.new(params_dwarf)
-    @user = User.find(params[:user_id])
-    @dwarf.user = @user
+    @dwarf.user = current_user
     if @dwarf.save
       redirect_to profile_path
     else
@@ -41,7 +46,7 @@ class DwarvesController < ApplicationController
   private
 
   def params_dwarf
-    params.require(:dwarf).permit(:name, :description, :age, :address)
+    params.require(:dwarf).permit(:name, :description, :age, :address, :photo)
   end
 
   def set_dwarf
