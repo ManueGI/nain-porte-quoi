@@ -1,24 +1,20 @@
 <div class="container">
-<div>
-  <h1><%= @dwarf.name %></h1>
-  <p><%= @dwarf.description %></p>
-  <p><%=@dwarf.age%></p>
-</div>
 
+  <div class="dwarf-card">
+    <div class="d-flex">
+      <h1><%= @dwarf.name %>|</h1>
+      <h1 class="mb-3"><%= @dwarf.age %></h1>
+    </div>
+    <%  if @dwarf.photo.attached?  %>
+      <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
+    <% end %>
+    <p><%= @dwarf.description %></p>
+  </div>
 
-<%  if @dwarf.photo.attached?  %>
-<%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
-<% end %>
-
-<%= simple_form_for [@dwarf, @rental] do |f| %>
-  <%= f.input  :rental_begin,
-              as: :string,
-              input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved }} %>
-  <%#= f.input  :rental_end,
-              as: :string,
-              input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved } } %>
-  <%= f.submit %>
-
-<% end %>
-
+  <%= simple_form_for [@dwarf, @rental] do |f| %>
+    <%= f.input  :rental_begin,
+                as: :string,
+                input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved }} %>
+    <%= f.submit %>
+  <% end %>
 </div>
