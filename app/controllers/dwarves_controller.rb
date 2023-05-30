@@ -7,7 +7,13 @@ class DwarvesController < ApplicationController
   end
 
   def show
-
+    @rental = Rental.new
+    @reserved = @dwarf.rentals.map do |rental|
+      {
+        from: rental.rental_begin,
+        to: rental.rental_end
+      }
+    end
   end
 
   def new
