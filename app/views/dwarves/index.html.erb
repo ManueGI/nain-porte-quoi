@@ -2,26 +2,12 @@
   <div class="dwarf-display-grid">
     <% @dwarves.each do |dwarf| %>
       <div class="card-dwarf m-3">
-        <div id="dwarf-img">
           <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
-        </div>
-        <h2 class="p-1"><%= dwarf.name %></h2>
-        <h3 class="p-1"><%= dwarf.age %></h3>
-        <p class="p-1"><%= dwarf.description %></p>
-        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+        <h2 class="p-2 m-1"><%= dwarf.name %></h2>
+        <h3 class="p-2 m-1"><%= dwarf.age %> ans</h3>
+        <p class="p-2 m-1"><%= dwarf.description %></p>
+        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
       </div>
     <% end %>
   </div>
 </div>
-
-<%# <div class="card-trip">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-  <div class="card-trip-infos">
-    <div>
-      <h2>Title here</h2>
-      <p>Short description here!</p>
-    </div>
-    <h2 class="card-trip-pricing">£99.99</h2>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-  </div>
-</div> %>
