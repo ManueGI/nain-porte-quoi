@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :dwarves
   has_many :rentals
   has_many :rented_dwarves, through: :rentals, source: "dwarf"
+  has_one_attached :avatar, dependent: :destroy
 
   # validates :user_name, :first_name, :last_name, :address, presence: true
 
