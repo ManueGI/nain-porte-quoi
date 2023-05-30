@@ -2,7 +2,9 @@
   <div class="dwarf-display-grid">
     <% @dwarves.each do |dwarf| %>
       <div class="card-dwarf m-3 rounded">
+        <% if dwarf.photo.attached? %>
           <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
+        <% end %>
         <h2 class="p-2 m-1"><%= dwarf.name %></h2>
         <h3 class="p-2 m-1"><%= dwarf.age %> ans</h3>
         <p class="p-2 m-1"><%= dwarf.description %></p>
