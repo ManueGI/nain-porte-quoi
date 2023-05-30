@@ -1,0 +1,55 @@
+<div>
+<h1>Vos nains réservés</h1>
+ <% @rented_dwarves.each do |rented_dwarf| %>
+      <div class="card-dwarf m-3 d-flex">
+        <h2 class="p-1"><%= rented_dwarf.name %></h2>
+        <h3 class="p-1"><%= rented_dwarf.user.user_name %></h2>
+        <%  rentals = rented_dwarf.rentals %>
+
+        <% rentals.each do |rental| %>
+        <div >
+        <%= rental.rental_begin %>
+        <%= rental.rental_end %>
+        <%= rental.status %>
+        </div>
+        <% end %>
+
+        <%= link_to "Voir ce nain", dwarf_path(rented_dwarf), class:"btn btn-primary p-2 m-2" %>
+        </div>
+        <% end %>
+</div>
+
+<div>
+<h1>Vos nains en location</h1>
+ <% @dwarves.each do |dwarf| %>
+      <div class="card-dwarf m-3 d-flex">
+        <h2 class="p-1"><%= dwarf.name %></h2>
+        <%  rentals = dwarf.rentals %>
+
+        <% rentals.each do |rental| %>
+        <div >
+        <%= rental.rental_begin %>
+        <%= rental.rental_end %>
+        <%= rental.status %>
+        </div>
+        <% end %>
+
+        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+        </div>
+        <% end %>
+</div>
+
+
+<div class="row">
+ <% @dwarves.each do |dwarf| %>
+      <div class="card-dwarf m-3 col-2">
+        <div id="dwarf-img">
+          <%= cl_image_tag dwarf.photo.key, height: 200, width: 200, crop: :fill, class:"dwarf-img"%>
+        </div>
+        <h2 class="p-1"><%= dwarf.name %></h2>
+        <h3 class="p-1"><%= dwarf.age %></h3>
+        <p class="p-1"><%= dwarf.description %></p>
+        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+        </div>
+        <% end %>
+</div>
