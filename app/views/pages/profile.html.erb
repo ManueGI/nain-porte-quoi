@@ -1,20 +1,33 @@
 <div>
 <h1>Vos nains réservés</h1>
+
  <% @rented_dwarves.each do |rented_dwarf| %>
-      <div class="card-dwarf m-3 d-flex">
-        <h2 class="p-1"><%= rented_dwarf.name %></h2>
-        <h3 class="p-1"><%= rented_dwarf.user.user_name %></h2>
-        <%  rentals = rented_dwarf.rentals %>
+      <div class="ligne">
+        <div class="rented-date ">
+            <h2 ><%= rented_dwarf.name %></h2>
+            <h3 > - proposé par <%= rented_dwarf.user.user_name %></h2>
+            <div >
+            <%  rentals = rented_dwarf.rentals %>
+            <% rentals.each do |rental| %>
+            <div class="d-flex w-100 col-6">
 
-        <% rentals.each do |rental| %>
-        <div >
-        <%= rental.rental_begin %>
-        <%= rental.rental_end %>
-        <%= rental.status %>
+            <p>réservé du <%=rental.rental_begin  %> au <%= rental.rental_end %></p>
+
+      <%= link_to "annuler", destroy_path(rental), data: { turbo_method: "DELETE" } %>
+
+
+
+
+            <button  class="<%= style_for_status(rental.status)%> button-rental"><%= rental.status %></button>
+            </div>
+
+            <% end %>
+
+            </div>
+
         </div>
-        <% end %>
 
-        <%= link_to "Voir ce nain", dwarf_path(rented_dwarf), class:"btn btn-primary p-2 m-2" %>
+        <%= link_to "Voir ce nain", dwarf_path(rented_dwarf), class:"btn btn-primary button-rental" %>
         </div>
         <% end %>
 </div>
@@ -22,15 +35,21 @@
 <div>
 <h1>Vos nains en location</h1>
  <% @dwarves.each do |dwarf| %>
-      <div class="card-dwarf m-3 d-flex">
-        <h2 class="p-1"><%= dwarf.name %></h2>
+      <div class="ligne">
+        <h2><%= dwarf.name %></h2>
         <%  rentals = dwarf.rentals %>
 
         <% rentals.each do |rental| %>
         <div >
         <%= rental.rental_begin %>
         <%= rental.rental_end %>
-        <%= rental.status %>
+
+        <%= link_to "accepter", accept_path(rental), data: { turbo_method: "PATCH" } %>
+        <%= link_to "refuser", refuse_path(rental), data: { turbo_method: "PATCH" } %>
+
+
+          <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></p>
+
         </div>
         <% end %>
 
