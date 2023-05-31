@@ -4,4 +4,5 @@ class Review < ApplicationRecord
   has_one :dwarf, through: :rental
 
   validates :content, :score, presence: true
+  validates :rental_id, uniqueness: { message: "You already submitted a review for this rental" }
 end

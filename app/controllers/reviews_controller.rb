@@ -1,16 +1,22 @@
 class ReviewsController < ApplicationController
+  before_action :set_rental, only: [:new, :create]
+  # before_save :verify_user, only: [:create]
+
   def new
     @review = Review.new
   end
 
   def create
-    raise
     @review = Review.new(params_review)
-    @dwarf.user = current_user
-    if @review.save
-      redirect_to profile_path
+    @review.rental = @rental
+    if current_user.id == @rental.user_id
+      if @review.save
+        redirect_to profile_path
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      redirect_to "/"
     end
   end
 
@@ -20,7 +26,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:content, :score)
   end
 
-  def set_review
-    @review = Review.find(params[:id])
+  def set_rental
+    @rental = Rental.find(params[:rental_id])
   end
 end
