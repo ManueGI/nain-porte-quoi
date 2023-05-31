@@ -1,5 +1,5 @@
 class RentalsController < ApplicationController
-  before_action :set_rental, only: [:show, :edit, :update, :destroy]
+  before_action :set_rental, only: [:show, :edit, :update, :destroy, :accept, :refuse]
   def index
     @rentals = Rental.all
   end
@@ -22,7 +22,8 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to profile_path
     else
-      render :show
+      render "dwarves/show", status: :unprocessable_entity
+
     end
   end
 
@@ -36,6 +37,16 @@ class RentalsController < ApplicationController
 
   def destroy
     @rental.destroy
+    redirect_to profile_path
+  end
+
+  def accept
+    @rental.accepted!
+    redirect_to profile_path
+  end
+
+  def refuse
+    @rental.refused!
     redirect_to profile_path
   end
 

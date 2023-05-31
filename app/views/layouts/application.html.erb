@@ -14,7 +14,11 @@
 
   <body>
     <%= render 'shared/navbar' %>
+    <% unless action_name == "home" %>
+    <div class="container">
+    <% end %>
     <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
   </body>
 </html>
