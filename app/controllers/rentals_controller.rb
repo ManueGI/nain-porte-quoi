@@ -22,7 +22,8 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to profile_path
     else
-      render :show
+      render "dwarves/show", status: :unprocessable_entity
+
     end
   end
 

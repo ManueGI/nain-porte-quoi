@@ -1,6 +1,8 @@
 require "json"
 require "open-uri"
 
+User.destroy_all
+
 seeding_users = ["jerryphilippe", "evanshulot", "leeloom", "ManueGI"]
 
 seeding_users.each do |user_name|
