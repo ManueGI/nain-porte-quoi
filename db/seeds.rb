@@ -11,7 +11,7 @@ seeding_users.each do |user_name|
   g_user = JSON.parse(user_serialized)
   user = User.new
   user.user_name = g_user['login']
-  g_user['name'].nil? ? name = "No Name".split : name = g_user['name'].split
+  g_user['name'].nil? ? name = "#{g_user['login']} not-defined".split : name = g_user['name'].split
   user.email = "#{name.first}@nain.com"
   user.first_name = name.first
   user.last_name = name.last
