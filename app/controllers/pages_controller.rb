@@ -8,4 +8,6 @@ class PagesController < ApplicationController
     @dwarves = current_user.dwarves
     @rented_dwarves = current_user.rented_dwarves
   end
+
+
 end

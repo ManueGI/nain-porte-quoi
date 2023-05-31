@@ -3,7 +3,7 @@ class Dwarf < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
   belongs_to :user
   has_many :rentals
-  has_one_attached :photo
+  has_one_attached :photo, dependent: :destroy
 
-  validates :name, :description, :age, :address, presence: true
+  validates :name, :description, :age, :address, :price, presence: true
 end
