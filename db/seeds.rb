@@ -25,6 +25,7 @@ seeding_users.each do |user_name|
   dwarf.name = "Dwarf-#{name.first}"
   dwarf.description = "Dwarf-#{name.first} is a very nice dwarf will fit in every garden"
   dwarf.age = rand(5..99)
+  dwarf.price = rand(15..75)
   dwarf.address = "16 Villa Gaudelet, 75011 Paris"
   dwarf.user_id = user.id
   dwarf.save!
