@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :dwarves
-  has_many :rentals
+  has_many :dwarves, dependent: :destroy
+  has_many :rentals, dependent: :destroy
   has_many :rented_dwarves, through: :rentals, source: "dwarf"
   has_one_attached :avatar, dependent: :destroy
 
