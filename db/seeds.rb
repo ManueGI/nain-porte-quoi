@@ -11,7 +11,7 @@ seeding_users.each do |user_name|
   g_user = JSON.parse(user_serialized)
   user = User.new
   user.user_name = g_user['login']
-  g_user['name'].nil? ? name = "No Name".split : name = g_user['name'].split
+  g_user['name'].nil? ? name = "#{g_user['login']} not-defined".split : name = g_user['name'].split
   user.email = "#{name.first}@nain.com"
   user.first_name = name.first
   user.last_name = name.last
@@ -25,6 +25,7 @@ seeding_users.each do |user_name|
   dwarf.name = "Dwarf-#{name.first}"
   dwarf.description = "Dwarf-#{name.first} is a very nice dwarf will fit in every garden"
   dwarf.age = rand(5..99)
+  dwarf.price = rand(15..75)
   dwarf.address = "16 Villa Gaudelet, 75011 Paris"
   dwarf.user_id = user.id
   dwarf.save!
