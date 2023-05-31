@@ -14,6 +14,7 @@ class DwarvesController < ApplicationController
         to: rental.rental_end
       }
     end
+    @markers = [{ lat: @dwarf.latitude, lng: @dwarf.longitude }]
   end
 
   def new

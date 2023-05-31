@@ -1,9 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
-import mapboxgl from 'mapbox-gl'
+import mapboxgl from 'mapbox-gl' // Don't forget this!
 
-// Connects to data-controller="map"
 export default class extends Controller {
-  static value = {
+  static values = {
     apiKey: String,
     markers: Array
   }
