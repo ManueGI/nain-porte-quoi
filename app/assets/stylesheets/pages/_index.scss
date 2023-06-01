@@ -12,7 +12,8 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  h2 {
+  text-align: center;
+  .bold-font {
     font-weight: bold;
   }
   .score {
@@ -43,6 +44,14 @@
   color: white;
 }
 
+.display-index-flex {
+  display: flex;
+}
+
+#cart-index {
+  position: sticky;
+  top: 15px;
+}
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {

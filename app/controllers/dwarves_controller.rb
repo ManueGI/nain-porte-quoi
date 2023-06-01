@@ -4,6 +4,14 @@ class DwarvesController < ApplicationController
 
   def index
     @dwarves = Dwarf.all
+    @markers = @dwarves.geocoded.map do |dwarf|
+      {
+        lat: dwarf.latitude,
+        lng: dwarf.longitude,
+        info_window_html: render_to_string(partial: "shared/info_window", locals: { dwarf: dwarf }),
+        marker_html: render_to_string(partial: "shared/marker", locals: { dwarf: dwarf })
+      }
+    end
   end
 
   def show
@@ -15,6 +23,12 @@ class DwarvesController < ApplicationController
         to: rental.rental_end
       }
     end
+    @markers = [{ lat: @dwarf.latitude,
+                  lng: @dwarf.longitude,
+                  info_window_html: render_to_string(partial: "shared/info_window", locals: { dwarf: @dwarf }),
+                  marker_html: render_to_string(partial: "shared/marker", locals: { dwarf: @dwarf })
+                }]
+    # raise
   end
 
   def new
