@@ -2,6 +2,7 @@
   <div class="flex-elements">
     <div class="dwarf-card p-2 m-2">
         <h1><%= @dwarf.name %> | <%= @dwarf.age %></h1>
+        <p><%= @dwarf.price %>€ / jour</p>
       <%  if @dwarf.photo.attached?  %>
         <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
       <% end %>
@@ -11,11 +12,17 @@
     <% if user_signed_in? %>
       <% if @dwarf.user != current_user %>
         <div id="rental-form">
-          <%= simple_form_for [@dwarf, @rental] do |f| %>
+          <%= simple_form_for [@dwarf, @rental], {data: { controller: "datepicker",  datepicker_reserved_dates_value: @reserved, datepicker_price_value: @dwarf.price, action: "change->datepicker#getprice"}} do |f| %>
+          <p>Dates de réservation</p>
             <%= f.input :rental_begin,
                         as: :string,
-                        label: "dates de Réservation",
-                        input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved }} %>
+                        label: "du",
+                        input_html: { data: {datepicker_target: "datebegin"}} %>
+             <%= f.input :rental_end,
+                         as: :string,
+                         label: "au",
+                         input_html: { data: {datepicker_target: "dateend" }} %>
+            <p data-datepicker-target="priceupdated"><%= @dwarf.price%> €</p>
             <%= f.submit "Réserver ce nain", class:"submit-button"%>
           <% end %>
         </div>
