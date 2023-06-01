@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   get "/profile", to: "pages#profile", as: :profile
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  patch "rentals/:id/accept", to: "rentals#accept", as: :accept
+  patch "rentals/:id/refuse", to: "rentals#refuse", as: :refuse
+  delete "rentals/:id/destroy", to: "rentals#destroy", as: :destroy
   # Defines the root path route ("/")
   # root "articles#index"
 end

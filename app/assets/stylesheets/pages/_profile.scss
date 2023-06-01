@@ -1,0 +1,31 @@
+.ligne {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  vertical-align: middle;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 0;
+  justify-content: space-between;
+}
+
+.rented-date{
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: space-evenly;
+  line-height: 25px;
+}
+
+.rented-date{
+  p{
+    margin: 0;
+  }
+}
+
+.button-rental{
+  height: 40px;
+  width: 150px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
