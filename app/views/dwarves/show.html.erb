@@ -1,7 +1,9 @@
 <div class="container">
   <div class="flex-elements">
     <div class="dwarf-card p-2 m-2">
+
       <h1><%= @dwarf.name %>&nbsp&nbsp&nbsp<%= @dwarf.age %>&nbsp&nbsp&nbsp<span class="score"><%= @score %>&nbsp<i class="fa-solid fa-star"></i><span></h1>
+      <p><%= @dwarf.price %>€ / jour</p>
       <%  if @dwarf.photo.attached?  %>
         <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
       <% end %>
@@ -9,17 +11,22 @@
     </div>
     <div>
 
-
-      <% if user_signed_in? %>
-        <% if @dwarf.user != current_user %>
-          <div id="rental-form">
-            <%= simple_form_for [@dwarf, @rental] do |f| %>
-              <%= f.input :rental_begin,
-                          as: :string,
-                          label: "dates de Réservation",
-                          input_html: { data: { controller: "datepicker", datepicker_reserved_dates_value: @reserved }} %>
-              <%= f.submit "Réserver ce nain", class:"submit-button"%>
-            <% end %>
+    <% if user_signed_in? %>
+      <% if @dwarf.user != current_user %>
+        <div id="rental-form">
+          <%= simple_form_for [@dwarf, @rental], {data: { controller: "datepicker",  datepicker_reserved_dates_value: @reserved, datepicker_price_value: @dwarf.price, action: "change->datepicker#getprice"}} do |f| %>
+          <p>Dates de réservation</p>
+            <%= f.input :rental_begin,
+                        as: :string,
+                        label: "du",
+                        input_html: { data: {datepicker_target: "datebegin"}} %>
+             <%= f.input :rental_end,
+                         as: :string,
+                         label: "au",
+                         input_html: { data: {datepicker_target: "dateend" }} %>
+            <p data-datepicker-target="priceupdated"><%= @dwarf.price%> €</p>
+            <%= f.submit "Réserver ce nain", class:"submit-button"%>
+          <% end %>
           </div>
           <div class="mt-4" style="width: 100%; height: 350px;"
           data-controller="map"
