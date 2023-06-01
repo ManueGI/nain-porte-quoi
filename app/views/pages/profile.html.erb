@@ -1,98 +1,84 @@
 <div>
-<h1>Vos nains réservés</h1>
+  <h1>Vos nains réservés</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nain</th>
+        <th scope="col">Propriétaire</th>
+        <th scope="col">Date</th>
+        <th scope="col">Annulation</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Commentaire</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rented_dwarves.each do |rented_dwarf| %>
+        <tr>
+          <td>
+            <%= link_to dwarf_path(rented_dwarf) do %>
+              <%= rented_dwarf.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= rented_dwarf.user.user_name %>
+          </td>
+          <%  rentals = rented_dwarf.rentals.where(user_id: current_user.id) %>
+          <td>
 
- <% @rented_dwarves.each do |rented_dwarf| %>
-      <div class="ligne">
-        <div class="rented-date ">
-            <h2 ><%= rented_dwarf.name %></h2>
-            <h3 > - proposé par <%= rented_dwarf.user.user_name %></h2>
-            <div >
-            <%  rentals = rented_dwarf.rentals %>
             <% rentals.each do |rental| %>
-            <div class="d-flex w-100 col-6">
-
-            <p>réservé du <%=rental.rental_begin  %> au <%= rental.rental_end %></p>
-
-      <%= link_to "annuler", destroy_path(rental), data: { turbo_method: "DELETE" } %>
-
-
-
-
-            <button  class="<%= style_for_status(rental.status)%> button-rental"><%= rental.status %></button>
-            <% if rental.reviews.exists? %>
-              <a class="btn btn-primary button-rental disabled" href="/" disabled>Commentaire</a>
-            <% else %>
-              <%# <%= link_to "Commentaire", new_rental_review_path(rental.id), class:"btn btn-primary button-rental" %>
-              <button type="button" class="btn btn-primary button-rental" data-bs-toggle="modal" data-bs-target="#ReviewModal<%= rental.id %>">Commentaire</button>
-              <div class="modal fade" id="ReviewModal<%= rental.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Donnez votre commentaire sur <%= rental.dwarf.name  %></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <%= simple_form_for([rental, Review.new]) do |f| %>
-                        <%= f.input :content , label: 'Votre commentaire:', error: 'Vous devez remplir votre commentaire pour soumettre celui-ci' %>
-                        <%= f.input :score, label: "Donnez un note à #{rental.dwarf.name}", collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}} %>
-                        <%= f.submit 'Soumettre mon commentaire', class: "btn btn-primary" %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <%=rental.rental_begin  %><%= rental.rental_end %></p>
             <% end %>
-            </div>
-
+          </td>
+          <td>
+            <% rentals.each do |rental| %>
+              <%= link_to "annuler", destroy_path(rental), class: "btn btn-danger", data: { turbo_method: "DELETE" } %><br>
             <% end %>
+          </td>
+          <td>
+            <% rentals.each do |rental| %>
+              <button  class="<%= style_for_status(rental.status)%> button-rental"><%= rental.status %></button><br>
+            <% end %>
+          </td>
+          <td>
 
-            </div>
-
-        </div>
-
-        <%= link_to "Voir ce nain", dwarf_path(rented_dwarf), class:"btn btn-primary button-rental" %>
-        </div>
-        <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <div>
-<h1>Vos nains en location</h1>
- <% @dwarves.each do |dwarf| %>
-      <div class="ligne">
-        <h2><%= dwarf.name %></h2>
-        <%  rentals = dwarf.rentals %>
-
-        <% rentals.each do |rental| %>
+  <h1>Vos nains en location</h1>
+  <% @dwarves.each do |dwarf| %>
+    <div class="ligne">
+      <h2><%= dwarf.name %></h2>
+      <%  rentals = dwarf.rentals %>
+      <% rentals.each do |rental| %>
         <div >
-        <%= rental.rental_begin %>
-        <%= rental.rental_end %>
-
-        <%= link_to "accepter", accept_path(rental), data: { turbo_method: "PATCH" } %>
-        <%= link_to "refuser", refuse_path(rental), data: { turbo_method: "PATCH" } %>
-
-
+          <%= rental.rental_begin %>
+          <%= rental.rental_end %>
+          <%= link_to "accepter", accept_path(rental), data: { turbo_method: "PATCH" } %>
+          <%= link_to "refuser", refuse_path(rental), data: { turbo_method: "PATCH" } %>
           <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></button>
-
-
         </div>
-        <% end %>
-
-        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
-        </div>
-        <% end %>
+      <% end %>
+      <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+    </div>
+  <% end %>
 </div>
 
 
 <div class="row">
- <% @dwarves.each do |dwarf| %>
-      <div class="card-dwarf m-3 col-2">
-        <div id="dwarf-img">
-          <%= cl_image_tag dwarf.photo.key, height: 200, width: 200, crop: :fill, class:"dwarf-img"%>
-        </div>
-        <h2 class="p-1"><%= dwarf.name %></h2>
-        <h3 class="p-1"><%= dwarf.age %></h3>
-        <p class="p-1"><%= dwarf.description %></p>
-        <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
-        </div>
-        <% end %>
+  <% @dwarves.each do |dwarf| %>
+    <div class="card-dwarf m-3 col-2">
+      <div id="dwarf-img">
+        <%= cl_image_tag dwarf.photo.key, height: 200, width: 200, crop: :fill, class:"dwarf-img"%>
+      </div>
+      <h2 class="p-1"><%= dwarf.name %></h2>
+      <h3 class="p-1"><%= dwarf.age %></h3>
+      <p class="p-1"><%= dwarf.description %></p>
+      <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+    </div>
+  <% end %>
 </div>
