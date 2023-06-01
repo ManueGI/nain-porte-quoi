@@ -1,7 +1,7 @@
 <div class="container">
   <div class="flex-elements">
     <div class="dwarf-card p-2 m-2">
-      <h1><%= @dwarf.name %> | <%= @dwarf.age %></h1>
+      <h1><%= @dwarf.name %>&nbsp&nbsp&nbsp<%= @dwarf.age %>&nbsp&nbsp&nbsp<span class="score"><%= @score %>&nbsp<i class="fa-solid fa-star"></i><span></h1>
       <%  if @dwarf.photo.attached?  %>
         <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
       <% end %>
@@ -44,4 +44,14 @@
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       <% end %>
   </div>
+</div>
+<div class="container">
+    <% @dwarf.reviews.each do |review| %>
+        <div class="dwarf-card reviews-show">
+        <h3>Comentaire de <b> <%= review.user.user_name %>&nbsp&nbsp</b><i class="fa-solid fa-comment"></i></h3>
+        <p><i class="fa-solid fa-quote-left"></i></i>  <%= review.content %>  <i class="fa-solid fa-quote-right"></i></p>
+        <p >Note: <span class="score"><%= review.score %><i class="fa-solid fa-star"></i></p></span>
+      </div>
+    <% end %>
+
 </div>

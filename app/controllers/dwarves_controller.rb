@@ -16,6 +16,7 @@ class DwarvesController < ApplicationController
 
   def show
     @rental = Rental.new
+    @score = dwarf_score(@dwarf)
     @reserved = @dwarf.rentals.map do |rental|
       {
         from: rental.rental_begin,
@@ -57,7 +58,23 @@ class DwarvesController < ApplicationController
     redirect_to profile_path
   end
 
+  helper_method :dwarf_score
+
   private
+
+  def dwarf_score(dwarf)
+    @total_scores = 0
+    @counter = 0
+    dwarf.reviews.each do |review|
+      @total_scores += review.score
+      @counter += 1
+    end
+    if @total_scores == 0
+      return 0
+    else
+      return (@total_scores.to_f / @counter.to_f).round(1)
+    end
+  end
 
   def params_dwarf
     params.require(:dwarf).permit(:name, :description, :age, :address, :photo, :price)
