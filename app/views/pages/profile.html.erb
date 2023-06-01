@@ -19,6 +19,29 @@
 
 
             <button  class="<%= style_for_status(rental.status)%> button-rental"><%= rental.status %></button>
+            <% if rental.reviews.exists? %>
+              <a class="btn btn-primary button-rental disabled" href="/" disabled>Commentaire</a>
+            <% else %>
+              <%# <%= link_to "Commentaire", new_rental_review_path(rental.id), class:"btn btn-primary button-rental" %>
+              <button type="button" class="btn btn-primary button-rental" data-bs-toggle="modal" data-bs-target="#ReviewModal<%= rental.id %>">Commentaire</button>
+              <div class="modal fade" id="ReviewModal<%= rental.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Donnez votre commentaire sur <%= rental.dwarf.name  %></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <%= simple_form_for([rental, Review.new]) do |f| %>
+                        <%= f.input :content , label: 'Votre commentaire:', error: 'Vous devez remplir votre commentaire pour soumettre celui-ci' %>
+                        <%= f.input :score, label: "Donnez un note à #{rental.dwarf.name}", collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}} %>
+                        <%= f.submit 'Soumettre mon commentaire' %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
             </div>
 
             <% end %>
@@ -48,7 +71,8 @@
         <%= link_to "refuser", refuse_path(rental), data: { turbo_method: "PATCH" } %>
 
 
-          <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></p>
+          <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></button>
+
 
         </div>
         <% end %>

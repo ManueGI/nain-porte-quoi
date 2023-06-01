@@ -7,6 +7,7 @@
         <% end %>
         <h2 class="p-2 m-1"><%= dwarf.name %></h2>
         <h3 class="p-2 m-1"><%= dwarf.age %> ans</h3>
+        <h3 class="p-2 m-1 score"><%= dwarf_score(dwarf) %>&nbsp<i class="fa-solid fa-star"></i></h3>
         <p class="p-2 m-1"><%= dwarf.description %></p>
         <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
       </div>

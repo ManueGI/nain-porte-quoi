@@ -1,7 +1,7 @@
-<h1>Comment our Dwarf :</h1>
+<h1>Donnez votre commentaire sur <%= @rental.dwarf.name  %>:</h1>
 
 <%= simple_form_for([@rental, @review]) do |f| %>
-  <%= f.input :content %>
-  <%= f.input :score %>
-  <%= f.submit %>
+  <%= f.input :content , label: 'Votre commentaire:', error: 'Vous devez remplir votre commentaire pour soumettre celui-ci' %>
+  <%= f.input :score, label: "Donnez un note à #{@rental.dwarf.name}", collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}} %>
+  <%= f.submit 'Soumettre mon commentaire' %>
 <% end %>
