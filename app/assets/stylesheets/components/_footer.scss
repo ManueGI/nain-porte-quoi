@@ -1,5 +1,5 @@
 .footer {
-  background: #F4F4F4;
+  background: $yellow;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7,6 +7,14 @@
   padding: 0px 50px;
   color: rgba(0,0,0,0.3);
 }
+
+.footer-home {
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
 .footer-links {
   display: flex;
   align-items: center;
@@ -26,5 +34,5 @@
 }
 
 .footer-copyright p {
-  margin-top: 50px;
+  margin-top: 15px;
 }

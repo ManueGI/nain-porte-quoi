@@ -1,6 +1,23 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background-color: #F6FFDE;;
+  color: #2e261a;
+}
+
+.navbar-lewagon-home {
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  h1 {
+    color:white;
+  }
+  .nav-link {
+    color:white
+  }
+  #logo {
+    filter: invert(100%);
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -14,4 +31,12 @@
 #logo {
   height: 50px;
   width: 35px;
+}
+
+.nain-letter {
+  color: $pink;
+}
+
+.other-letter {
+  color: whitesmoke;
 }

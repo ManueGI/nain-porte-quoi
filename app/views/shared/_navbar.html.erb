@@ -1,7 +1,21 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= "navbar-lewagon-home" if action_name == "home" %>">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <h1> <%= image_tag "logo.png", id:"logo" %> NainPorteQuoi</h1>
+      <h1 class="gnome-font"> <%= image_tag "logo.png", id:"logo" %>
+  <span class="nain-letter">N</span>
+  <span class="nain-letter">a</span>
+  <span class="nain-letter">i</span>
+  <span class="nain-letter">n</span>
+  <span class="other-letter">P</span>
+  <span class="other-letter">o</span>
+  <span class="other-letter">r</span>
+  <span class="other-letter">t</span>
+  <span class="other-letter">e</span>
+  <span class="other-letter">Q</span>
+  <span class="other-letter">u</span>
+  <span class="other-letter">o</span>
+  <span class="other-letter">i</span>
+      </h1>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +47,7 @@
           </li>
         <% else %>
           <!--li class="nav-item"-->
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link"%>
           <!--/li-->
         <% end %>
       </ul>
