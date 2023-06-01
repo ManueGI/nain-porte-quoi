@@ -18,10 +18,12 @@
           <p>Dates de réservation</p>
             <%= f.input :rental_begin,
                         as: :string,
+                        error: "Vous devez choisir une date pour passer du temps avec ce nain",
                         label: "du",
                         input_html: { data: {datepicker_target: "datebegin"}} %>
              <%= f.input :rental_end,
                          as: :string,
+                         error: "",
                          label: "au",
                          input_html: { data: {datepicker_target: "dateend" }} %>
             <p data-datepicker-target="priceupdated"><%= @dwarf.price%> €</p>
