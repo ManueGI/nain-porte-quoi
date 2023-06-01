@@ -35,7 +35,7 @@
                       <%= simple_form_for([rental, Review.new]) do |f| %>
                         <%= f.input :content , label: 'Votre commentaire:', error: 'Vous devez remplir votre commentaire pour soumettre celui-ci' %>
                         <%= f.input :score, label: "Donnez un note à #{rental.dwarf.name}", collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}} %>
-                        <%= f.submit 'Soumettre mon commentaire' %>
+                        <%= f.submit 'Soumettre mon commentaire', class: "btn btn-primary" %>
                       <% end %>
                     </div>
                   </div>
