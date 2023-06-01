@@ -6,8 +6,10 @@
           <% if dwarf.photo.attached? %>
             <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
           <% end %>
-          <p class="bold-font"><%= dwarf.name %> | <%= dwarf.age %></p>
-          <h3 class="p-2 m-1 score"><%= dwarf_score(dwarf) %>&nbsp<i class="fa-solid fa-star"></i></h3>
+          <div class="display-name-and-score-flex">
+            <p class="bold-font"><%= dwarf.name %>, <%= dwarf.age %></p>
+            <h3 class="p-2 m-1 score"><%= dwarf_score(dwarf) %>&nbsp<i class="fa-solid fa-star"></i></h3>
+          </div>
           <p><%= dwarf.description %></p>
           <p class="bold-font"> <%= dwarf.price %>€ par jour </p>
           <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
