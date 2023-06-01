@@ -4,7 +4,7 @@
 
 .dwarf-display-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
 }
 
@@ -12,8 +12,15 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  h2 {
+  text-align: center;
+  width: 20em;
+  .bold-font {
     font-weight: bold;
+  }
+  .score {
+    color: rgb(205, 181, 45);
+    font-size: 20px;
+    font-weight: bolder;
   }
 }
 
@@ -38,6 +45,20 @@
   color: white;
 }
 
+.display-index-flex {
+  display: flex;
+}
+
+#cart-index {
+  position: sticky;
+  top: 15px;
+}
+
+.display-name-and-score-flex {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+}
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
@@ -63,13 +84,13 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .dwarf-display-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .dwarf-display-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }

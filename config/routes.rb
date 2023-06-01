@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resources :rentals, only: [:create, :update]
   end
 
+  resources :rentals, only: [] do
+    resources :reviews, only: [:new, :create]
+  end
+
   get "/profile", to: "pages#profile", as: :profile
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   patch "rentals/:id/accept", to: "rentals#accept", as: :accept
