@@ -4,7 +4,7 @@
 
 .dwarf-display-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
 }
 
@@ -13,6 +13,7 @@
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: center;
+  width: 20em;
   .bold-font {
     font-weight: bold;
   }
@@ -46,11 +47,19 @@
 
 .display-index-flex {
   display: flex;
+  justify-content: space-around;
 }
 
 #cart-index {
   position: sticky;
   top: 15px;
+  margin-top: 15px;
+}
+
+.display-name-and-score-flex {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
 }
 
 // Smallest device
@@ -77,13 +86,13 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .dwarf-display-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .dwarf-display-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }

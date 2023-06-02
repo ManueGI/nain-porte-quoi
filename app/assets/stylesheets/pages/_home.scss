@@ -2,7 +2,13 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url('banner.png');
   background-size: cover;
   background-position: 50% 35%;
-  padding: 250px 0;
+  padding: 335px 0;
+  height: 100vh;
+}
+
+.accroche {
+  margin-left: 63px;
+  font-family: 'fredoka';
 }
 
 .banner h1 {
@@ -11,6 +17,8 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 32px;
   font-weight: bold;
+  font-family: 'fredoka';
+
 }
 
 .banner p {
@@ -18,7 +26,61 @@
   color: white;
   opacity: .9;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Source sans pro';
 
 }
 
+.btn-pink {
+  background-color: $pink;
+  color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  font-family: 'Source sans pro';
+  &:hover {background-color: #ce2e63;}
+}
 
+.top-68 {
+  top: 68px;
+}
+
+.bottom-20 {
+  bottom: 20px;
+}
+
+.container {
+  text-align: center;
+}
+
+#arrow {
+  background: $yellow;
+  color: $dark-brown;
+  border-radius: 30px;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {background-color: $green;}
+}
+
+.bas-page-home {
+  background-color: $yellow;
+  color: $dark-brown;
+
+
+}
+
+#philosophie {
+  padding-left: 150px;
+  padding-right: 100px;
+  font-family: 'fredoka';
+  font-size: 50px;
+}
+
+.card-product-infos {
+  padding: 100px;
+  text-align: justify;
+  font-family: 'Source sans pro';
+}

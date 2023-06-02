@@ -1,44 +1,54 @@
-<div class="container">
-  <div class="flex-elements">
-    <div class="dwarf-card p-2 m-2">
-
-      <h1><%= @dwarf.name %>&nbsp&nbsp&nbsp<%= @dwarf.age %>&nbsp&nbsp&nbsp<span class="score"><%= @score %>&nbsp<i class="fa-solid fa-star"></i><span></h1>
-      <p><%= @dwarf.price %>€ / jour</p>
+<div class="teste">
+      <h1><%= @dwarf.name %> | <%= @dwarf.age %>ans <span class="score"><%= @score %>&nbsp<i class="fa-solid fa-star"></i><span></h1>
+      <p class="price"><%= @dwarf.price %>€ / jour</p>
+  <div class="">
       <%  if @dwarf.photo.attached?  %>
+    <div class="dwarf-card-show flex-elements-show">
         <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
       <% end %>
-      <p class="mt-3"><%= @dwarf.description %></p>
+      <div class="description">
+      <h3>description du nain :</h3>
+        <p><%= @dwarf.description %></p>
+
+      </div>
     </div>
     <div>
 
     <% if user_signed_in? %>
+<div class="flex-elements-show">
       <% if @dwarf.user != current_user %>
-        <div id="rental-form">
+
+      <div class="mt-4 mb-4 mr-4 map-show" style="width: 80%; height: 400px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+
+      <div id="rental-form">
           <%= simple_form_for [@dwarf, @rental], {data: { controller: "datepicker",  datepicker_reserved_dates_value: @reserved, datepicker_price_value: @dwarf.price, action: "change->datepicker#getprice"}} do |f| %>
-          <p>Dates de réservation</p>
+            <p>Dates de réservation</p>
             <%= f.input :rental_begin,
                         as: :string,
+                        error: "Vous devez choisir une date pour passer du temps avec ce nain",
                         label: "du",
                         input_html: { data: {datepicker_target: "datebegin"}} %>
              <%= f.input :rental_end,
                          as: :string,
+                         error: "",
                          label: "au",
                          input_html: { data: {datepicker_target: "dateend" }} %>
             <p data-datepicker-target="priceupdated"><%= @dwarf.price%> €</p>
             <%= f.submit "Réserver ce nain", class:"submit-button"%>
-          <% end %>
-          </div>
-          <div class="mt-4" style="width: 100%; height: 350px;"
-          data-controller="map"
-          data-map-markers-value="<%= @markers.to_json %>"
-          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-          <% else %>
-          <div class="mt-4" style="width: 400px; height: 450px;"
+      <% end %>
+      </div>
+      <% else %>
+      <div class="mt-4" style="width: 400px; height: 450px;"
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-        <% end %>
-        <% else %>
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+      <% end %>
+      <% else %>
         <div id="log-ask">
           <%= link_to "Connectez-vous", new_user_session_path, class:"ask-log-button" %>
           <p>ou</p>
@@ -48,11 +58,14 @@
           <div class="mt-4" style="width: 100%; height: 350px;"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"
-          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
       <% end %>
   </div>
+
 </div>
-<div class="container">
+</div>
+<div class="container-dwarves">
     <% @dwarf.reviews.each do |review| %>
         <div class="dwarf-card reviews-show">
         <h3>Comentaire de <b> <%= review.user.user_name %>&nbsp&nbsp</b><i class="fa-solid fa-comment"></i></h3>
@@ -60,5 +73,13 @@
         <p >Note: <span class="score"><%= review.score %><i class="fa-solid fa-star"></i></p></span>
       </div>
     <% end %>
+
+<% if user_signed_in? %>
+      <% if @dwarf.user == current_user %>
+    <%= link_to "Modifie ton nain", edit_dwarf_path(@dwarf)%>
+    <%= link_to "Relâche ton nain", destroy_dwarf_path(@dwarf), data: { turbo_method: "DELETE", turbo_confirm: "Es-tu sûr(e) de vouloir remettre ton nain en liberté ?"} %>
+<% end %>
+<% end %>
+</div>
 
 </div>
