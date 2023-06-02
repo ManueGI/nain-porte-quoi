@@ -69,7 +69,7 @@
 <div class="container-dwarves">
     <% @dwarf.reviews.each do |review| %>
         <div class="dwarf-card reviews-show">
-        <h3>Comentaire de <b> <%= review.user.user_name %>&nbsp&nbsp</b><i class="fa-solid fa-comment"></i></h3>
+        <h4>Comentaire de <b> <%= review.user.user_name %>&nbsp&nbsp</b><i class="fa-solid fa-comment"></i></h3>
         <p><i class="fa-solid fa-quote-left"></i></i>  <%= review.content %>  <i class="fa-solid fa-quote-right"></i></p>
         <p >Note: <span class="score"><%= review.score %><i class="fa-solid fa-star"></i></p></span>
       </div>
@@ -82,7 +82,7 @@
             <%= link_to "Modifie ton nain", edit_dwarf_path(@dwarf)%>
         </button>
         <button class="button-show btn btn-pink">
-            <%= link_to "Relâche ton nain", destroy_dwarf_path(@dwarf), data: { turbo_method: "DELETE", turbo_confirm: "Es-tu sûr(e) de vouloir remettre ton nain en liberté ?"} %>
+            <%= link_to "Relâche ton nain", destroy_dwarf_path(@dwarf), data: { turbo_method: "DELETE", turbo_confirm: "Es-tu sûr(e) de vouloir remettre ton nain en liberté ?"}, class:"" %>
         </button>
       </div>
 <% end %>
