@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
       if @review.save
         redirect_to profile_path
       else
-        render :new, status: :unprocessable_entity
+        redirect_to profile_path(error: "invalid-form", modal: "ReviewModal#{@review.rental.id}")
       end
     else
       redirect_to "/"
