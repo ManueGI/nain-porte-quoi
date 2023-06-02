@@ -4,6 +4,7 @@
   text-align: left!important;
   padding-top: 10px;
   font-family: 'fredoka';
+  margin-bottom: 30px;
 
   p {
     font-family: 'fredoka';
@@ -19,6 +20,8 @@
   .description {
     width: 400px;
     text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
 
@@ -36,13 +39,14 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 20px;
 
 }
 
 #rental-form {
   background-color: white;
-  margin-top: 20px;
-  margin-bottom: 20px;
+
+
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
   font-family: 'fredoka';
@@ -132,9 +136,9 @@ body {
   color: white;
   border-radius: 30px;
   text-align: center;
-  margin: 20px;
+  margin: 5px;
   padding: 20;
-  width: 190px;
+  width: 220px;
   height: 60px;
   font-family: 'fredoka';
   font-weight: 200;
