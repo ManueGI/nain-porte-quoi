@@ -1,24 +1,24 @@
-<div class="container">
-  <div class="display-index-flex">
-    <div class="dwarf-display-grid">
-      <% @dwarves.each do |dwarf| %>
-        <div class="card-dwarf m-3 rounded">
-          <% if dwarf.photo.attached? %>
-            <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
-          <% end %>
-          <div class="display-name-and-score-flex">
-            <p class="bold-font"><%= dwarf.name %>, <%= dwarf.age %></p>
-            <h3 class="p-2 m-1 score"><%= dwarf_score(dwarf) %>&nbsp<i class="fa-solid fa-star"></i></h3>
+<div class="bg-yellow">
+    <div class="display-index-flex">
+      <div class="dwarf-display-grid">
+        <% @dwarves.each do |dwarf| %>
+          <div class="card-dwarf m-3 rounded">
+            <% if dwarf.photo.attached? %>
+              <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
+            <% end %>
+            <div class="display-name-and-score-flex">
+              <p class="bold-font"><%= dwarf.name %>, <%= dwarf.age %></p>
+              <h3 class="p-2 m-1 score"><%= dwarf_score(dwarf) %>&nbsp<i class="fa-solid fa-star"></i></h3>
+            </div>
+            <p><%= dwarf.description %></p>
+            <p class="bold-font"> <%= dwarf.price %>€ par jour </p>
+            <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
           </div>
-          <p><%= dwarf.description %></p>
-          <p class="bold-font"> <%= dwarf.price %>€ par jour </p>
-          <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+      <div id="cart-index" style="width: 350px; height: 500px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
-    <div id="cart-index" style="width: 100%; height: 500px;"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
-</div>
