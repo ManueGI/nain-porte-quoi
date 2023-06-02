@@ -24,7 +24,7 @@
           <td>
 
             <% rentals.each do |rental| %>
-              <p>du <b><%=rental.rental_begin.strftime('%d.%m.%Y')  %></b> au <b><%= rental.rental_end.strftime('%d.%m.%Y') %></b></p>
+              <p>du <b><%=rental&.rental_begin&.strftime('%d.%m.%Y')  %></b> au <b><%= rental&.rental_end&.strftime('%d.%m.%Y') %></b></p>
             <% end %>
           </td>
           <td>
