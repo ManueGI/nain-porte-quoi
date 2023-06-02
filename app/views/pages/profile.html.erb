@@ -1,4 +1,4 @@
-<div>
+<div class="container py-5">
   <h1>Vos nains réservés</h1>
   <table class="table">
     <thead>
@@ -15,9 +15,7 @@
       <% @rented_dwarves.each do |rented_dwarf| %>
         <tr>
           <td>
-            <%= link_to dwarf_path(rented_dwarf) do %>
-              <%= rented_dwarf.name %>
-            <% end %>
+            <%= link_to rented_dwarf.name, dwarf_path(rented_dwarf), class: "text-decoration-none badge bg-info text-wrap p-3"  %>
           </td>
           <td>
             <%= rented_dwarf.user.user_name %>
@@ -26,12 +24,12 @@
           <td>
 
             <% rentals.each do |rental| %>
-              <%=rental.rental_begin  %><%= rental.rental_end %></p>
+              <p>du <b><%=rental.rental_begin.strftime('%d.%m.%Y')  %></b> au <b><%= rental.rental_end.strftime('%d.%m.%Y') %></b></p>
             <% end %>
           </td>
           <td>
             <% rentals.each do |rental| %>
-              <%= link_to "annuler", destroy_path(rental), class: "btn btn-danger", data: { turbo_method: "DELETE" } %><br>
+              <%= link_to "Annuler", destroy_path(rental), class: "btn btn-danger button-rental m-1", data: { turbo_method: "DELETE" } %><br>
             <% end %>
           </td>
           <td>
@@ -40,7 +38,30 @@
             <% end %>
           </td>
           <td>
-
+            <% rentals.each do |rental| %>
+              <% if rental.reviews.exists? %>
+                <a class="btn btn-success button-rental disabled m-1" href="/" disabled>Effectué</a>
+              <% else %>
+                <button type="button" class="btn btn-primary button-rental m-1" data-bs-toggle="modal" data-bs-target="#ReviewModal<%= rental.id %>">A faire</button>
+                <div class="modal fade" id="ReviewModal<%= rental.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Donnez votre commentaire sur <%= rental.dwarf.name  %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <%= simple_form_for([rental, Review.new]) do |f| %>
+                          <%= f.input :content , label: 'Votre commentaire:', error: 'Vous devez remplir votre commentaire pour soumettre celui-ci' %>
+                          <%= f.input :score, label: "Donnez un note à #{rental.dwarf.name}", collection: (1..5).to_a, input_html: {data: {controller: "star-rating"}} %>
+                          <%= f.submit 'Soumettre mon commentaire', class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -50,24 +71,53 @@
 
 <div>
   <h1>Vos nains en location</h1>
-  <% @dwarves.each do |dwarf| %>
-    <div class="ligne">
-      <h2><%= dwarf.name %></h2>
-      <%  rentals = dwarf.rentals %>
-      <% rentals.each do |rental| %>
-        <div >
-          <%= rental.rental_begin %>
-          <%= rental.rental_end %>
-          <%= link_to "accepter", accept_path(rental), data: { turbo_method: "PATCH" } %>
-          <%= link_to "refuser", refuse_path(rental), data: { turbo_method: "PATCH" } %>
-          <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></button>
-        </div>
-      <% end %>
-      <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
-    </div>
-  <% end %>
-</div>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nain</th>
+          <th scope="col">Locataire</th>
+          <th scope="col">Dates</th>
+          <th scope="col">Accepter</th>
+          <th scope="col">Refuser</th>
+          <th scope="col">Statut</th>
+        </tr>
+      </thead>
+      <tbody>
 
+        <% @dwarves.each do |dwarf| %>
+          <%  rentals = dwarf.rentals %>
+          <tr>
+            <td><%= dwarf.name %></td>
+            <td>
+              <% rentals.each do |rental| %>
+              <p><%= rental.user.user_name%></p>
+              <% end %>
+            </td>
+            <td>
+              <% rentals.each do |rental| %>
+              <p>du <b><%=rental.rental_begin.strftime('%d.%m.%Y')  %></b> au <b><%= rental.rental_end.strftime('%d.%m.%Y') %></b></p>
+              <% end %>
+            </td>
+            <td>
+              <% rentals.each do |rental| %>
+                <%= link_to "accepter", accept_path(rental), class: "btn btn-success button-rental m-1", data: { turbo_method: "PATCH" } %>
+              <% end %>
+            </td>
+            <td>
+              <% rentals.each do |rental| %>
+                <%= link_to "refuser", refuse_path(rental), class: "btn btn-danger button-rental m-1", data: { turbo_method: "PATCH" } %>
+              <% end %>
+            </td>
+            <td>
+            <% rentals.each do |rental| %>
+              <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></button>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>
 
 <div class="row">
   <% @dwarves.each do |dwarf| %>
