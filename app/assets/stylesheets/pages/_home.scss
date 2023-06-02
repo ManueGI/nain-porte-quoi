@@ -59,6 +59,7 @@
 #arrow {
   background: $yellow;
   color: $dark-brown;
+  opacity: 0.8;
   border-radius: 30px;
   font-size: 20px;
   width: 30px;
@@ -66,7 +67,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {background-color: $green;}
+  &:hover {background-color: lightgray;
+           opacity: 0.7;}
 }
 
 .bas-page-home {

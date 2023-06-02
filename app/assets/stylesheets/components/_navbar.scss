@@ -18,6 +18,10 @@
   .nav-link {
     color:white
   }
+
+  .other-letter {
+    filter: invert(100%)
+  }
   #logo {
     filter: invert(100%);
   }
@@ -41,5 +45,5 @@
 }
 
 .other-letter {
-  color: whitesmoke;
+  color: #1d1e1f;
 }

@@ -1,11 +1,23 @@
-<h1>Present your Dwarf :</h1>
+<div class= "container-formulaire border border-1 shadow-sm p-3 mb-5 bg-body rounded">
 
-<%= simple_form_for(@dwarf) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :age %>
-  <%= f.input :address %>
-  <%= f.input :price %>
-  <%=f.input :photo, as: :file %>
-  <%= f.submit %>
-<% end %>
+    <h1 id="titre-formulaire" class="border-bottom">Présente ton Nain</h1>
+
+    <div class= "formulaire">
+        <%= simple_form_for(@dwarf) do |f| %>
+          <%= f.input :name,
+              label: "Nom", class:"element-formulaire" %>
+          <%= f.input :description,
+              label: "Description", class:"element-formulaire"%>
+          <%= f.input :age,
+              label: "Âge", class:"element-formulaire" %>
+          <%= f.input :address,
+              label: "Adresse", class:"element-formulaire" %>
+          <%= f.input :price,
+              label: "Prix", class:"element-formulaire" %>
+          <%=f.input :photo, as: :file,
+              label: "Photo", class:"element-formulaire"%>
+          <%= f.submit "Ajoutez votre nain", class:"submit-btn" %>
+        <% end %>
+      </div>
+
+</div>
