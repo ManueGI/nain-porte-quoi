@@ -8,6 +8,10 @@
   grid-gap: 16px;
 }
 
+.bg-yellow {
+  background-color: $yellow !important;
+}
+
 .card-dwarf {
   overflow: hidden;
   background: white;
@@ -47,11 +51,13 @@
 
 .display-index-flex {
   display: flex;
+  justify-content: space-around;
 }
 
 #cart-index {
   position: sticky;
   top: 15px;
+  margin-top: 15px;
 }
 
 .display-name-and-score-flex {
