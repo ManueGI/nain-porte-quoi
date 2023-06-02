@@ -1,28 +1,20 @@
 <div class="teste">
       <h1><%= @dwarf.name %> | <%= @dwarf.age %>ans <span class="score"><%= @score %>&nbsp<i class="fa-solid fa-star"></i><span></h1>
       <p class="price"><%= @dwarf.price %>€ / jour</p>
-  <div class="">
+
+  <div class="flex-elements-show">
+
       <%  if @dwarf.photo.attached?  %>
-    <div class="dwarf-card-show flex-elements-show">
         <%= cl_image_tag @dwarf.photo.key, height: 300, crop: :fill %>
       <% end %>
-      <div class="description">
-      <h3>description du nain :</h3>
-        <p><%= @dwarf.description %></p>
 
+      <div class="description">
+        <h3>Description du nain :</h3>
+        <p><%= @dwarf.description %></p>
       </div>
-    </div>
-    <div>
 
     <% if user_signed_in? %>
-<div class="flex-elements-show">
       <% if @dwarf.user != current_user %>
-
-      <div class="mt-4 mb-4 mr-4 map-show" style="width: 80%; height: 400px;"
-          data-controller="map"
-          data-map-markers-value="<%= @markers.to_json %>"
-          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
 
       <div id="rental-form">
           <%= simple_form_for [@dwarf, @rental], {data: { controller: "datepicker",  datepicker_reserved_dates_value: @reserved, datepicker_price_value: @dwarf.price, action: "change->datepicker#getprice"}} do |f| %>
@@ -39,8 +31,19 @@
                          input_html: { data: {datepicker_target: "dateend" }} %>
             <p data-datepicker-target="priceupdated"><%= @dwarf.price%> €</p>
             <%= f.submit "Réserver ce nain", class:"submit-button"%>
+            <p class="condition">Aucun montant ne vous sera débité pour le moment. Le propriétaire devra valider votre demande de réservation</p>
       <% end %>
       </div>
+
+
+  </div>
+
+      <div class="mt-4 mb-4 mr-4 map-show" style="width: 72%; height: 400px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+
       <% else %>
       <div class="mt-4" style="width: 400px; height: 450px;"
         data-controller="map"
@@ -61,9 +64,7 @@
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         </div>
       <% end %>
-  </div>
 
-</div>
 </div>
 <div class="container-dwarves">
     <% @dwarf.reviews.each do |review| %>
@@ -76,8 +77,12 @@
 
 <% if user_signed_in? %>
       <% if @dwarf.user == current_user %>
-    <%= link_to "Modifie ton nain", edit_dwarf_path(@dwarf)%>
-    <%= link_to "Relâche ton nain", destroy_dwarf_path(@dwarf), data: { turbo_method: "DELETE", turbo_confirm: "Es-tu sûr(e) de vouloir remettre ton nain en liberté ?"} %>
+      <button class="button-show btn btn-green">
+          <%= link_to "Modifie ton nain", edit_dwarf_path(@dwarf)%>
+      </button>
+      <button class="button-show btn btn-pink">
+          <%= link_to "Relâche ton nain", destroy_dwarf_path(@dwarf), data: { turbo_method: "DELETE", turbo_confirm: "Es-tu sûr(e) de vouloir remettre ton nain en liberté ?"} %>
+      </button>
 <% end %>
 <% end %>
 </div>

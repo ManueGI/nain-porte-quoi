@@ -24,6 +24,7 @@ export default class extends Controller {
       altFormat: "d/m/Y",
       dateFormat: "Y-m-d",
     })
+    
   }
 
   getprice(){
