@@ -15,7 +15,7 @@
       <% @rented_dwarves.each do |rented_dwarf| %>
         <tr>
           <td>
-            <%= link_to rented_dwarf.name, dwarf_path(rented_dwarf), class: "text-decoration-none badge bg-info text-wrap p-3"  %>
+            <%= link_to rented_dwarf.name, dwarf_path(rented_dwarf), class: "btn btn-pink-profil"  %>
           </td>
           <td>
             <%= rented_dwarf.user.user_name %>
@@ -121,14 +121,12 @@
 
 <div class="row">
   <% @dwarves.each do |dwarf| %>
-    <div class="card-dwarf m-3 col-2">
-      <div id="dwarf-img">
-        <%= cl_image_tag dwarf.photo.key, height: 200, width: 200, crop: :fill, class:"dwarf-img"%>
-      </div>
+    <div class="card-dwarf-profile m-3 col-2">
+        <%= cl_image_tag dwarf.photo.key, class:"dwarf-img-profile"%>
       <h2 class="p-1"><%= dwarf.name %></h2>
       <h3 class="p-1"><%= dwarf.age %></h3>
       <p class="p-1"><%= dwarf.description %></p>
-      <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-primary p-2 m-2" %>
+      <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
     </div>
   <% end %>
 </div>
