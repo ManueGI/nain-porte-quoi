@@ -29,3 +29,33 @@
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
+
+.card-dwarf-profile {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 20em;
+  border-radius: 5px;
+  padding: 0px;
+}
+
+.dwarf-img-profile {
+  height: 15em;
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-pink-profil {
+  color: white;
+  font-weight: bold;
+  background: $pink;
+  transition: background 0.3s ease;
+  border: 1px solid blueviolet;
+  border-radius: 30px;
+}
+
+.btn-pink-profil:hover {
+  transition: 0.3s;
+  background: $pink;
+  color: rgb(219, 189, 248);
+}

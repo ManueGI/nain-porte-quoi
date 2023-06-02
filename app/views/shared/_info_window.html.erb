@@ -2,8 +2,6 @@
     <% if dwarf.photo.attached? %>
       <%= cl_image_tag dwarf.photo.key, height: 300, width: 400, crop: :fill, class:"dwarf-img"%>
     <% end %>
-    <h3 class="p-2 m-1"><%= dwarf.name %></h3>
-    <h4 class="p-2 m-1"><%= dwarf.age %> ans</h4>
-    <p class="p-2 m-1"><%= dwarf.description %></p>
+    <h4 class="p-2 m-1"><%= dwarf.name %></h4>
     <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
 </div>

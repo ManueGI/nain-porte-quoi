@@ -12,37 +12,44 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  text-align: center;
   width: 20em;
+  border-radius: 5px;
   .bold-font {
     font-weight: bold;
+    margin-left: 15px;
   }
   .score {
     color: rgb(205, 181, 45);
     font-size: 20px;
     font-weight: bolder;
   }
+
+  #padding-left-2 {
+    text-align: start;
+    margin-left: 15px;
+  }
 }
 
 .dwarf-img {
-  height: 200px;
+  height: 20em;
   width: 100%;
   object-fit: cover;
 }
 
 .btn-gradient {
   color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
   font-weight: bold;
-  background: linear-gradient(#167FFB, #0F60C4);
+  background: $pink;
   transition: background 0.3s ease;
-  border: 1px solid #0F60C4;
+  border: 1px solid blueviolet;
+  border-radius: 30px;
+  width: 85%;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(#147EFF, #0F67DA);
-  color: white;
+  transition: 0.3s;
+  background: $pink;
+  color: rgb(219, 189, 248);
 }
 
 .display-index-flex {
@@ -54,12 +61,13 @@
   position: sticky;
   top: 15px;
   margin-top: 15px;
+  border-radius: 5px;
 }
 
 .display-name-and-score-flex {
   display: flex;
   align-items: baseline;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 // Smallest device
