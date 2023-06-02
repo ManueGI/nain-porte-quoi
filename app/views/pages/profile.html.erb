@@ -110,7 +110,7 @@
             </td>
             <td>
             <% rentals.each do |rental| %>
-              <button class="<%= style_for_status(rental.status)%>"> <%=rental.status %></button>
+              <button class="<%= style_for_status(rental.status)%> button-rental"> <%=rental.status %></button>
             <% end %>
             </td>
           </tr>
