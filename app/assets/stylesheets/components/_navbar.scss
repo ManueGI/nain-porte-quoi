@@ -2,10 +2,12 @@
   justify-content: space-between;
   background-color: #F6FFDE;;
   color: #2e261a;
-  border-bottom: gray solid thin;
+  border-bottom: rgba(0,0,0,0.3) solid 1px;
+  height: 100px;
 }
 
 .navbar-lewagon-home {
+  border-bottom: none!important;
   background-color: transparent;
   position: absolute;
   width: 100%;
