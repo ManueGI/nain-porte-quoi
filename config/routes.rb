@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   patch "rentals/:id/accept", to: "rentals#accept", as: :accept
   patch "rentals/:id/refuse", to: "rentals#refuse", as: :refuse
   delete "rentals/:id/destroy", to: "rentals#destroy", as: :destroy
+  delete "dwarves/:id/destroy", to: "dwarves#destroy", as: :destroy_dwarf
+ 
   # Defines the root path route ("/")
   # root "articles#index"
 end

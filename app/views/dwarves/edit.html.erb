@@ -1,0 +1,11 @@
+<h1>Modifie ton nain :</h1>
+
+<%= simple_form_for(@dwarf) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :age %>
+  <%= f.input :address %>
+  <%= f.input :price %>
+  <%=f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
