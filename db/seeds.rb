@@ -1,10 +1,15 @@
 require "json"
-require "open-uri"
+require 'open-uri'
+
+
+puts "cleaning seeds"
 
 User.destroy_all
 Dwarf.destroy_all
 Rental.destroy_all
 Review.destroy_all
+
+puts "starting seeds"
 
 seeding_users = ["jerryphilippe", "evanshulot", "leeloom", "ManueGI", "PaulJhonson26", "paultursuru", "LauraPerson", "phsyko92", "MihajaRz", "ThbltLmr", "RayanAnser", "kabolindustrie", "Empty-n", "ghbozz", "Adamogu"]
 @descriptions = [
@@ -69,6 +74,7 @@ seeding_users = ["jerryphilippe", "evanshulot", "leeloom", "ManueGI", "PaulJhons
 @index = 0
 
 seeding_users.each do |user_name|
+  sleep(1)
   url = "https://api.github.com/users/#{user_name}"
   user_serialized = URI.open(url).read
   g_user = JSON.parse(user_serialized)
@@ -96,3 +102,38 @@ seeding_users.each do |user_name|
   dwarf.photo.attach(io: img, filename: "#{g_user['login']}.jpeg", content_type: "image/jpeg")
   @index += 1
 end
+
+Rental.destroy_all
+Review.destroy_all
+
+USERS = User.all
+DWARVES = Dwarf.all
+start_date = Date.parse('2024-01-11')
+end_date = Date.parse('2025-12-31')
+
+20.times do
+  rental = Rental.new
+  user = USERS[rand(0..(USERS.count)-1)]
+  rental.user = user
+  dwarf = DWARVES[rand(0..(DWARVES.count)-1)]
+  rental.dwarf = dwarf
+  rental.rental_begin = start_date + rand(end_date - start_date + 1)
+  rental.rental_end = rental.rental_begin + 5
+  rental.save!
+end
+
+RENTALS = Rental.all
+
+RENTALS.each do |rental|
+  review = Review.new
+  review.user = rental.user
+  review.dwarf = rental.dwarf
+  review.rental = rental
+  review.content = "Très bon nain"
+  review.score = 4
+  review.save!
+end
+
+
+
+puts "Seeds finish"
