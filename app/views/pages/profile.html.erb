@@ -1,62 +1,63 @@
 <div class="container py-5">
 
-
-      <h1>Vos nains réservés</h1>
-      <table class="table">
-        <thead>
+  <h1>Vos nains réservés</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nain</th>
+          <th scope="col">Propriétaire</th>
+          <th scope="col">Date</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Annulation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rented_dwarves.each do |rented_dwarf| %>
+                  <% rentals = rented_dwarf.rentals.where(user_id: current_user.id) %>
+                  <% rentals.each do |rental| %>
+                    <% if rental.rental_end.strftime('%d.%m.%Y') > DateTime.now  %>
           <tr>
-            <th scope="col">Nain</th>
-            <th scope="col">Propriétaire</th>
-            <th scope="col">Date</th>
-            <th scope="col">Statut</th>
-            <th scope="col">Annulation</th>
+            <td>
+              <%= link_to rented_dwarf.name, dwarf_path(rented_dwarf), class: "btn btn-pink-profil"  %>
+            </td>
+            <td>
+              <%= rented_dwarf.user.user_name %>
+            </td>
+            <%  rentals = rented_dwarf.rentals.where(user_id: current_user.id) %>
+            <td>
+
+              <% rentals.each do |rental| %>
+                <p>du <b><%=rental&.rental_begin&.strftime('%d.%m.%Y')  %></b> au <b><%= rental&.rental_end&.strftime('%d.%m.%Y') %></b></p>
+              <% end %>
+            </td>
+            <td>
+              <% rentals.each do |rental| %>
+                <% if rental.accepted? == true %>
+                  <button  class="<%= style_for_status(rental.status)%> button-rental">Réservé</button><br>
+                <% elsif rental.refused? == true %>
+                  <button  class="<%= style_for_status(rental.status)%> button-rental">Refusé</button><br>
+                <% else %>
+                <button  class="<%= style_for_status(rental.status)%> button-rental">En attente</button><br>
+                <% end %>
+              <% end %>
+            </td>
+
+            <td>
+              <% rentals.each do |rental| %>
+                <%= link_to destroy_path(rental), data: { turbo_method: "DELETE" } do %>
+                <i class="fa-solid fa-x lh-3" style="color:black"></i>
+                <% end %>
+
+              <% end %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @rented_dwarves.each do |rented_dwarf| %>
-                    <% rentals = rented_dwarf.rentals.where(user_id: current_user.id) %>
-                    <% rentals.each do |rental| %>
-                      <% if rental.rental_end.strftime('%d.%m.%Y') > DateTime.now  %>
-            <tr>
-              <td>
-                <%= link_to rented_dwarf.name, dwarf_path(rented_dwarf), class: "btn btn-pink-profil"  %>
-              </td>
-              <td>
-                <%= rented_dwarf.user.user_name %>
-              </td>
-              <%  rentals = rented_dwarf.rentals.where(user_id: current_user.id) %>
-              <td>
+        <% end %>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
 
-                <% rentals.each do |rental| %>
-                  <p>du <b><%=rental&.rental_begin&.strftime('%d.%m.%Y')  %></b> au <b><%= rental&.rental_end&.strftime('%d.%m.%Y') %></b></p>
-                <% end %>
-              </td>
-              <td>
-                <% rentals.each do |rental| %>
-                  <% if rental.accepted? == true %>
-                    <button  class="<%= style_for_status(rental.status)%> button-rental">Réservé</button><br>
-                  <% elsif rental.refused? == true %>
-                    <button  class="<%= style_for_status(rental.status)%> button-rental">Refusé</button><br>
-                  <% else %>
-                  <button  class="<%= style_for_status(rental.status)%> button-rental">En attente</button><br>
-                  <% end %>
-
-                <% end %>
-              </td>
-
-              <td>
-                <% rentals.each do |rental| %>
-                  <%= link_to "X", destroy_path(rental), class: "nav-link m-1 mt-3", data: { turbo_method: "DELETE" } %><br>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          <% end %>
-          <% end %>
-        </tbody>
-      </table>
-
-        <h1>Réservations passées</h1>
+  <h1>Réservations passées</h1>
     <table class="table">
     <thead>
       <tr>
@@ -118,8 +119,6 @@
     </tbody>
     </table>
 
-
-
 <div>
   <h1>Vos nains en location</h1>
   <table class="table">
@@ -136,35 +135,44 @@
       <tbody>
 
         <% @dwarves.each do |dwarf| %>
-          <%  rentals = dwarf.rentals %>
+          <% rentals = dwarf.rentals %>
+          <% rentals.each do |rental| %>
           <tr>
-            <td><%= dwarf.name %></td>
             <td>
-              <% rentals.each do |rental| %>
+              <%= link_to dwarf.name, dwarf_path(dwarf), class: "btn btn-pink-profil"  %>
+            </td>
+
+            <td>
               <p><%= rental.user.user_name%></p>
-              <% end %>
             </td>
+
             <td>
-              <% rentals.each do |rental| %>
               <p>du <b><%=rental.rental_begin.strftime('%d.%m.%Y')  %></b> au <b><%= rental.rental_end.strftime('%d.%m.%Y') %></b></p>
+            </td>
+
+            <td>
+              <%= link_to accept_path(rental), data: { turbo_method: "PATCH" }  do  %>
+                <i class="fa-solid fa-check lh-3" style="color: black"></i><br>
               <% end %>
             </td>
+
             <td>
-              <% rentals.each do |rental| %>
-                <%= link_to "accepter", accept_path(rental), class: "btn btn-success button-rental m-1", data: { turbo_method: "PATCH" } %>
+              <%= link_to  refuse_path(rental), data: { turbo_method: "PATCH" } do %>
+                <i class="fa-solid fa-x lh-3" style="color: black"></i><br>
               <% end %>
             </td>
+
             <td>
-              <% rentals.each do |rental| %>
-                <%= link_to "refuser", refuse_path(rental), class: "btn btn-danger button-rental m-1", data: { turbo_method: "PATCH" } %>
+              <% if rental.accepted? == true %>
+                <button  class="<%= style_for_status(rental.status)%> button-rental">Validé</button><br>
+              <% elsif rental.refused? == true %>
+                <button  class="<%= style_for_status(rental.status)%> button-rental">Refusé</button><br>
+              <% else %>
+              <button  class="<%= style_for_status(rental.status)%> button-rental">En attente</button><br>
               <% end %>
-            </td>
-            <td>
-            <% rentals.each do |rental| %>
-              <button class="<%= style_for_status(rental.status)%> button-rental"> <%=rental.status %></button>
-            <% end %>
             </td>
           </tr>
+        <% end %>
         <% end %>
       </tbody>
   </table>
@@ -180,6 +188,7 @@
       <%= link_to "Voir ce nain", dwarf_path(dwarf), class:"btn btn-gradient p-2 m-2" %>
     </div>
   <% end %>
+
 </div>
 
 </div>
