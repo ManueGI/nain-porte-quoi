@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def profile
     @dwarves = current_user.dwarves
-    @rented_dwarves = current_user.rented_dwarves
+    @rented_dwarves = current_user.rented_dwarves.order(:rental_begin)
   end
 
 
